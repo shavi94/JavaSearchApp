@@ -60,7 +60,7 @@ public class Ticket implements DataRetrieve {
 			Object assId=null;
 			Object subId=null;
 			Object orgId=null;
-			if(termval!=null && termval.equals(value)) {
+			if(termval!=null && termval.equalsIgnoreCase(value)) {
 				
 				ticket.keySet().parallelStream().forEachOrdered(key -> {
 					ticketfound = true;
@@ -78,7 +78,7 @@ public class Ticket implements DataRetrieve {
 				
 			}else if(term.equals("tags")) {
 				JSONArray tagsArr = (JSONArray) ticket.get(term);
-				if((value.equals("empty") || value.equals("") ) && tagsArr.isEmpty()) {
+				if((value.equalsIgnoreCase("empty") || value.equals("") ) && tagsArr.isEmpty()) {
 					
 					ticket.keySet().parallelStream().forEachOrdered(key -> {
 						ticketfound = true;
@@ -96,7 +96,7 @@ public class Ticket implements DataRetrieve {
 				}
 				Iterator<String> iterator = tagsArr.iterator();
 				while(iterator.hasNext()) {
-					if(iterator.next().equals(value)) {
+					if(iterator.next().equalsIgnoreCase(value)) {
 						
 						ticket.keySet().parallelStream().forEachOrdered(key -> {
 							ticketfound = true;
@@ -112,7 +112,7 @@ public class Ticket implements DataRetrieve {
 						System.out.println("");
 					}
 				}
-			}else if(value.equals("empty") && termval.equals("")) {
+			}else if(value.equalsIgnoreCase("empty") && termval.equals("")) {
 				ticket.keySet().parallelStream().forEachOrdered(key -> {
 					ticketfound = true;
 					System.out.printf("%-25s %-10s %n",key,ticket.get(key));

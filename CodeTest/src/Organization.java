@@ -60,7 +60,7 @@ public class Organization implements DataRetrieve {
 			Object orgId=null;
 			val =0;
 			tickval=0;
-			if(termval!=null && termval.equals(value)) {
+			if(termval!=null && termval.equalsIgnoreCase(value)) {
 				
 				org.keySet().parallelStream().forEachOrdered(key -> {
 					organizationfound = true;
@@ -75,7 +75,7 @@ public class Organization implements DataRetrieve {
 				
 			}else if(term.equals("tags")) {
 				JSONArray tagsArr = (JSONArray) org.get(term);
-				if((value.equals("empty") || value.equals("") ) && tagsArr.isEmpty()) {
+				if((value.equalsIgnoreCase("empty") || value.equals("") ) && tagsArr.isEmpty()) {
 					
 					org.keySet().parallelStream().forEachOrdered(key -> {
 						organizationfound = true;
@@ -92,7 +92,7 @@ public class Organization implements DataRetrieve {
 				Iterator<String> iterator = tagsArr.iterator();
 				while(iterator.hasNext()) {
 					
-					if(iterator.next().equals(value)) {
+					if(iterator.next().equalsIgnoreCase(value)) {
 						
 						org.keySet().parallelStream().forEachOrdered(key -> {
 							organizationfound = true;
@@ -108,7 +108,7 @@ public class Organization implements DataRetrieve {
 				}
 			}else if(term.equals("domain_names")) {
 				JSONArray domainArr = (JSONArray) org.get(term);
-				if((value.equals("empty") || value.equals("") ) && domainArr.isEmpty()) {
+				if((value.equalsIgnoreCase("empty") || value.equals("") ) && domainArr.isEmpty()) {
 					
 					org.keySet().parallelStream().forEachOrdered(key -> {
 						organizationfound = true;
@@ -125,7 +125,7 @@ public class Organization implements DataRetrieve {
 				Iterator<String> iterator = domainArr.iterator();
 				while(iterator.hasNext()) {
 					
-					if(iterator.next().equals(value)) {
+					if(iterator.next().equalsIgnoreCase(value)) {
 						
 						org.keySet().parallelStream().forEachOrdered(key -> {
 							organizationfound = true;
@@ -139,7 +139,7 @@ public class Organization implements DataRetrieve {
 						System.out.println("");
 					}
 				}
-			}else if(value.equals("empty") && termval.equals("")) {
+			}else if(value.equalsIgnoreCase("empty") && termval.equals("")) {
 				org.keySet().parallelStream().forEachOrdered(key -> {
 					organizationfound = true;
 					System.out.printf("%-25s %-10s %n",key,org.get(key));

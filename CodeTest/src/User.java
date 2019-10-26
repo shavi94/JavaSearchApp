@@ -60,7 +60,7 @@ public class User implements DataRetrieve {
 	//		System.out.println(termval);
 			Object extid=null;
 			Object orgId=null;
-			if(termval!=null && termval.equals(value)) {
+			if(termval!=null && termval.equalsIgnoreCase(value)) {
 				
 				emp.keySet().parallelStream().forEachOrdered(key -> {
 					userfound = true;
@@ -75,7 +75,7 @@ public class User implements DataRetrieve {
 				System.out.println("");
 			}else if(term.equals("tags")) {
 				JSONArray tagsArr = (JSONArray) emp.get(term);
-				if((value.equals("empty") || value.equals("") )&& tagsArr.isEmpty()) {
+				if((value.equalsIgnoreCase("empty") || value.equals("") )&& tagsArr.isEmpty()) {
 					
 					emp.keySet().parallelStream().forEachOrdered(key -> {
 						userfound = true;
@@ -92,7 +92,7 @@ public class User implements DataRetrieve {
 				}
 				Iterator<String> iterator = tagsArr.iterator();
 				while(iterator.hasNext()) {
-					if(iterator.next().equals(value)) {
+					if(iterator.next().equalsIgnoreCase(value)) {
 						
 						emp.keySet().parallelStream().forEachOrdered(key -> {
 							userfound = true;
@@ -107,7 +107,7 @@ public class User implements DataRetrieve {
 						System.out.println("");
 					}
 				}
-			}else if(value.equals("empty") && termval.equals("")) {
+			}else if(value.equalsIgnoreCase("empty") && termval.equals("")) {
 				emp.keySet().parallelStream().forEachOrdered(key -> {
 					userfound = true;
 					System.out.printf("%-25s %-10s %n",key,emp.get(key));
