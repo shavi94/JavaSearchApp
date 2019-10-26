@@ -28,7 +28,7 @@ public class User implements DataRetrieve {
 		
 		JSONParser parser = new JSONParser();
 		
-		try(FileReader reader = new FileReader("/users.json")){
+		try(FileReader reader = new FileReader("users.json")){
 			
 			Object obj = parser.parse(reader);
 			JSONArray users = (JSONArray) obj;
@@ -130,7 +130,7 @@ public class User implements DataRetrieve {
 		
 		JSONParser parser = new JSONParser();
 		
-		try(FileReader reader = new FileReader("/organizations.json")){
+		try(FileReader reader = new FileReader("organizations.json")){
 			
 			Object obj = parser.parse(reader);
 			JSONArray users = (JSONArray) obj;
@@ -170,7 +170,7 @@ public class User implements DataRetrieve {
 		
 		JSONParser parser = new JSONParser();
 		
-		try(FileReader reader = new FileReader("/tickets.json")){
+		try(FileReader reader = new FileReader("tickets.json")){
 			
 			Object obj = parser.parse(reader);
 			JSONArray users = (JSONArray) obj;
