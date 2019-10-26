@@ -75,6 +75,20 @@ public class Organization implements DataRetrieve {
 				
 			}else if(term.equals("tags")) {
 				JSONArray tagsArr = (JSONArray) org.get(term);
+				if((value.equals("empty") || value.equals("") ) && tagsArr.isEmpty()) {
+					
+					org.keySet().parallelStream().forEachOrdered(key -> {
+						organizationfound = true;
+						System.out.printf("%-25s %-10s %n",key,org.get(key));
+					});
+					
+					orgId = org.get("_id");
+					
+					getDatafromTickets(orgId);
+					getDatafromUsers(orgId);
+					System.out.println("");
+					
+				}
 				Iterator<String> iterator = tagsArr.iterator();
 				while(iterator.hasNext()) {
 					
@@ -94,6 +108,20 @@ public class Organization implements DataRetrieve {
 				}
 			}else if(term.equals("domain_names")) {
 				JSONArray domainArr = (JSONArray) org.get(term);
+				if((value.equals("empty") || value.equals("") ) && domainArr.isEmpty()) {
+					
+					org.keySet().parallelStream().forEachOrdered(key -> {
+						organizationfound = true;
+						System.out.printf("%-25s %-10s %n",key,org.get(key));
+					});
+					
+					orgId = org.get("_id");
+					
+					getDatafromTickets(orgId);
+					getDatafromUsers(orgId);
+					System.out.println("");
+					
+				}
 				Iterator<String> iterator = domainArr.iterator();
 				while(iterator.hasNext()) {
 					
@@ -111,6 +139,17 @@ public class Organization implements DataRetrieve {
 						System.out.println("");
 					}
 				}
+			}else if(value.equals("empty") && termval.equals("")) {
+				org.keySet().parallelStream().forEachOrdered(key -> {
+					organizationfound = true;
+					System.out.printf("%-25s %-10s %n",key,org.get(key));
+				});
+				
+				orgId = org.get("_id");
+				
+				getDatafromTickets(orgId);
+				getDatafromUsers(orgId);
+				System.out.println("");
 			}		
 		}catch (NullPointerException e) {
 			// TODO: handle exception
