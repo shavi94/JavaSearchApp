@@ -22,7 +22,7 @@ public class SearchableFields implements DataRetrieve {
 		JSONParser parser = new JSONParser();
 		
 		try{
-			FileReader reader = new FileReader("/tickets.json");
+			FileReader reader = new FileReader("tickets.json");
 			Object obj = parser.parse(reader);
 			JSONArray tickets = (JSONArray) obj;
 			
@@ -35,7 +35,7 @@ public class SearchableFields implements DataRetrieve {
 			newTicketList.forEach(field -> System.out.println(field));
 			
 
-			FileReader readeruser = new FileReader("/users.json");
+			FileReader readeruser = new FileReader("users.json");
 			Object objuser = parser.parse(readeruser);
 			JSONArray users = (JSONArray) objuser;
 			
@@ -48,7 +48,7 @@ public class SearchableFields implements DataRetrieve {
 			newUserList.forEach(field -> System.out.println(field));
 			
 			
-			FileReader readerorg = new FileReader("/organizations.json");
+			FileReader readerorg = new FileReader("organizations.json");
 			Object objorg = parser.parse(readerorg);
 			JSONArray organizations = (JSONArray) objorg;
 			
