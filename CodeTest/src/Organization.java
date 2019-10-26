@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -72,7 +73,45 @@ public class Organization implements DataRetrieve {
 				getDatafromUsers(orgId);
 				System.out.println("");
 				
-			}	
+			}else if(term.equals("tags")) {
+				JSONArray tagsArr = (JSONArray) org.get(term);
+				Iterator<String> iterator = tagsArr.iterator();
+				while(iterator.hasNext()) {
+					
+					if(iterator.next().equals(value)) {
+						
+						org.keySet().parallelStream().forEachOrdered(key -> {
+							organizationfound = true;
+							System.out.printf("%-25s %-10s %n",key,org.get(key));
+						});
+						
+						orgId = org.get("_id");
+						
+						getDatafromTickets(orgId);
+						getDatafromUsers(orgId);
+						System.out.println("");
+					}
+				}
+			}else if(term.equals("domain_names")) {
+				JSONArray domainArr = (JSONArray) org.get(term);
+				Iterator<String> iterator = domainArr.iterator();
+				while(iterator.hasNext()) {
+					
+					if(iterator.next().equals(value)) {
+						
+						org.keySet().parallelStream().forEachOrdered(key -> {
+							organizationfound = true;
+							System.out.printf("%-25s %-10s %n",key,org.get(key));
+						});
+						
+						orgId = org.get("_id");
+						
+						getDatafromTickets(orgId);
+						getDatafromUsers(orgId);
+						System.out.println("");
+					}
+				}
+			}		
 		}catch (NullPointerException e) {
 			// TODO: handle exception
 		}

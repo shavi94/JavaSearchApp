@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -72,6 +73,25 @@ public class User implements DataRetrieve {
 				getDatafromOrganizations(orgId);
 				getDatafromTickets(extid);
 				System.out.println("");
+			}else if(term.equals("tags")) {
+				JSONArray tagsArr = (JSONArray) emp.get(term);
+				Iterator<String> iterator = tagsArr.iterator();
+				while(iterator.hasNext()) {
+					if(iterator.next().equals(value)) {
+						
+						emp.keySet().parallelStream().forEachOrdered(key -> {
+							userfound = true;
+							System.out.printf("%-25s %-10s %n",key,emp.get(key));
+						});
+						
+						orgId = emp.get("organization_id");
+						extid = emp.get("_id");
+						
+						getDatafromOrganizations(orgId);
+						getDatafromTickets(extid);
+						System.out.println("");
+					}
+				}
 			}
 		}catch (NullPointerException e) {
 			// TODO: handle exception

@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.Format;
 import java.util.Formatter;
+import java.util.Iterator;
 import java.util.Locale;
 
 import org.json.simple.JSONArray;
@@ -75,6 +76,26 @@ public class Ticket implements DataRetrieve {
 				getDatafromUsers(assId,subId);
 				System.out.println("");
 				
+			}else if(term.equals("tags")) {
+				JSONArray tagsArr = (JSONArray) ticket.get(term);
+				Iterator<String> iterator = tagsArr.iterator();
+				while(iterator.hasNext()) {
+					if(iterator.next().equals(value)) {
+						
+						ticket.keySet().parallelStream().forEachOrdered(key -> {
+							ticketfound = true;
+							System.out.printf("%-25s %-10s %n",key,ticket.get(key));
+						});
+						
+						assId = ticket.get("assignee_id");
+						subId = ticket.get("submitter_id");
+						orgId = ticket.get("organization_id");
+						
+						getDatafromOrganizations(orgId);
+						getDatafromUsers(assId,subId);
+						System.out.println("");
+					}
+				}
 			}
 		
 		}catch (NullPointerException e) {
