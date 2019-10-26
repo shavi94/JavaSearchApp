@@ -78,6 +78,22 @@ public class Ticket implements DataRetrieve {
 				
 			}else if(term.equals("tags")) {
 				JSONArray tagsArr = (JSONArray) ticket.get(term);
+				if((value.equals("empty") || value.equals("") ) && tagsArr.isEmpty()) {
+					
+					ticket.keySet().parallelStream().forEachOrdered(key -> {
+						ticketfound = true;
+						System.out.printf("%-25s %-10s %n",key,ticket.get(key));
+					});
+					
+					assId = ticket.get("assignee_id");
+					subId = ticket.get("submitter_id");
+					orgId = ticket.get("organization_id");
+					
+					getDatafromOrganizations(orgId);
+					getDatafromUsers(assId,subId);
+					System.out.println("");
+					
+				}
 				Iterator<String> iterator = tagsArr.iterator();
 				while(iterator.hasNext()) {
 					if(iterator.next().equals(value)) {
@@ -96,6 +112,19 @@ public class Ticket implements DataRetrieve {
 						System.out.println("");
 					}
 				}
+			}else if(value.equals("empty") && termval.equals("")) {
+				ticket.keySet().parallelStream().forEachOrdered(key -> {
+					ticketfound = true;
+					System.out.printf("%-25s %-10s %n",key,ticket.get(key));
+				});
+				
+				assId = ticket.get("assignee_id");
+				subId = ticket.get("submitter_id");
+				orgId = ticket.get("organization_id");
+				
+				getDatafromOrganizations(orgId);
+				getDatafromUsers(assId,subId);
+				System.out.println("");
 			}
 		
 		}catch (NullPointerException e) {
